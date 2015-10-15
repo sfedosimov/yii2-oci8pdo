@@ -6,8 +6,7 @@
      * @package    Pdo
      * @subpackage Oci8
      * @author     Ben Ramsey <ramsey@php.net>
-     * @author     Sergey Fedosimov <sfedosimov@gmail.com>
-     * @copyright  Copyright (c) 2015 Ben Ramsey (http://benramsey.com/) & Sergey Fedosimov
+     * @copyright  Copyright (c) 2015 Ben Ramsey (http://benramsey.com/)
      * @license    http://open.benramsey.com/license/mit  MIT License
      */
 
