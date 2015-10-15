@@ -1,0 +1,25 @@
+{
+    "name": "sfedosimov/yii2-oci8pdo",
+    "description": "Emulation of the PDO driver by means of OCI8",
+    "type": "yii2-extension",
+    "keywords": ["yii2","oci8","pdo"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Sergey Fedosimov",
+            "email": "sfedosimov@gmail.com"
+        }
+    ],
+    "support": {
+        "email": "sfedosimov@gmail.com",
+        "issues": "https://github.com/sfedosimov/yii2-oci8pdo/issues"
+    },
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "sfedosimov\\oci8pdo\\": ""
+        }
+    }
+}
