@@ -67,7 +67,7 @@ A few examples:
 ```php
 <?php
     //Getting the Oracle DB connection
-    $oci = Yii::app()->dbOracle;    
+    $oci = Yii::$app->dbOracle;    
     $sql = <<<SQL
 SELECT
   t.ANNOUNCEMENT
@@ -90,108 +90,11 @@ SQL;
     }
 ```
 ```php
-<?php
-    $oci = Yii::app()->dbOracle;   
-    $command = $oci->createCommand();
-    $rows = $command->insert('CCQ.MY_ANNOUNCEMENTS', array(
-        'PKEY'=>new CDbExpression('(select max(PKEY)+1 from "CCQ"."MY_ANNOUNCEMENTS")'),
-        'PC_TO'=>'1111',
-        'PC_FROM'=>'1112',
-        'PRODUCTTYPE'=>'Internet',
-        'TTS'=>'',
-        'ANNOUNCEMENT'=>'7501.wav',
-        'TYPE'=>'0',
-        'DATETIME'=>new CDbExpression('SYSDATE'),
-        'TICKET'=>'123123',
-    ));
-```
-```php
-<?php
-    $row = Yii::app()->dbOracle->createCommand()
-            ->select('t.DESCRIPTION')
-            ->from('CCQ.MY_ANNOUNCEMENTS t')
-            ->where('TICKET=:ticket', array(':ticket'=>123))
-            ->queryRow();
-```
+
+Other documentation in development...
 
 ### 3.2 ActiveRecord works as well!
-There are two important things to consider however:
-* Column names are case-sensitive, that means that the Models' **attributes** are as well!
-* The database schema for Oracle (`COciSchema`) can be quite heavy on performance. That means that if you want to use Oracle in combination of ActiveRecord, you **HAVE** to cache the schema, or else you will experience a lot of performance degradation. Check the following two links:
-    - http://www.yiiframework.com/doc/blog/1.1/en/final.deployment#enabling-schema-caching
-    - http://www.yiiframework.com/wiki/118/incresing-ar-performance-in-connections-with-oracle/
-
-You also have to add a `getDbConnection()` method to your Model, so the right database connection is used.
-
-Some examples:
-```php
-<?php
-class IvrModel extends CActiveRecord
-{
-    /**
-	 * Returns the Oracle database connection used by this active record.
-	 * @return OciDbConnection the Oracle database connection used by this active record.
-	 */
-      public function getDbConnection()
-      {
-            if(self::$db!==null) {
-                  return self::$db;
-            } else {
-                  self::$db = Yii::app()->dbOracle;
-                  return self::$db;
-            }
-      }
-     
-      /**
-      * Returns the static model of the specified AR class.
-      * @param string $className active record class name.
-      * @return IvrModel the static model class
-      */
-      public static function model($className=__CLASS__)
-      {
-            return parent::model($className);
-      }
-     
-      /**
-      * @return string the associated database table name
-      */
-      public function tableName()
-      {
-            return 'CCQ.MY_ANNOUNCEMENTS';
-      }
-     
-      /**
-      * @return array validation rules for model attributes.
-      */
-      public function rules()
-      {
-            return array(
-                  array('PKEY', 'default', 'value'=>new CDbExpression('(select max(PKEY)+1 from "CCQ"."MY_ANNOUNCEMENTS")'),
-                                                      'setOnEmpty'=>false, 'on'=>'insert'),
-                  array('DATETIME', 'default', 'value'=>new CDbExpression('SYSDATE'), 'setOnEmpty'=>false, 'on'=>'insert'),
-                  array('DATETIME', 'default', 'value'=>new CDbExpression('SYSDATE'), 'setOnEmpty'=>false, 'on'=>'update'),
-            );
-      }
-}
-```
-```php
-<?php
-    $oneModel = IvrModel::model()->find('TICKET=:ticket', array(':ticket'=>12345));
-    $allModels = IvrModel::model()->findAll();
-```
-```php
-<?php
-    $model = new IvrModel;
-     //Note the attributes are fully capitalized
-    $model->PC_TO = 1111;
-    $model->PC_FROM = 1113;
-    $model->PRODUCTTYPE = 'Internet';
-    $model->TTS = '';
-    $model->ANNOUNCEMENT = '7501.wav';
-    $model->TYPE = 0;
-    $model->TICKET = 5555;
-    $model->save();
-```
+Documentation in development...
 
 ### 3.3 CLOB / BLOB params bind
 
