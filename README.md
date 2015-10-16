@@ -90,11 +90,57 @@ SQL;
     }
 ```
 ```php
+<?php
 
-Other documentation in development...
+$one = (new \yii\db\Query())
+        ->select(['ID', 'PHONE_LOGIN'])
+        ->from('USERS')
+        ->where('ID=:id', array(':id'=>849))
+        ->one(\Yii::$app->dbOracle);
+
+```
 
 ### 3.2 ActiveRecord works as well!
-Documentation in development...
+```php
+<?php
+
+    namespace app\models;
+
+    use yii\db\ActiveRecord;
+
+    class Users extends ActiveRecord
+    {
+        public static function primaryKey()
+        {
+            return array('ID');
+        }
+
+        public static function tableName()
+        {
+            return 'USERS';
+        }
+
+        public static function getDb()
+        {
+            return \Yii::$app->dbOracle;
+        }
+    }
+```
+
+```php
+<?php
+$users = Users::find()
+                    ->where(['ID' => 849])
+                    ->one();
+```
+
+```php
+<?php
+$usr = new Users();
+$usr->PHONE_LOGIN = 123;
+$usr->PASSWD = 13213;
+$usr->save();
+```
 
 ### 3.3 CLOB / BLOB params bind
 
