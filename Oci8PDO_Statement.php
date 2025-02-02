@@ -318,7 +318,7 @@
 
             if ($result === false) {
                 return false;
-            } elseif (!isset($result[$colNumber])) {
+            } elseif (!array_key_exists($colNumber, $result)) {
                 return false;
             } else {
                 return $result[$colNumber];
