@@ -164,6 +164,16 @@
         {
             return $this->_isTransaction;
         }
+        
+        /**
+         * Returns true if the current process is in a transaction
+         *
+         * @return bool
+         */
+        public function inTransaction()
+        {
+            return $this->_isTransaction;
+        }
 
         /**
          * Commits all statements issued during a transaction and ends the transaction
